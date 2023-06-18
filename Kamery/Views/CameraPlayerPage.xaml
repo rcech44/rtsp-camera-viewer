@@ -1,0 +1,64 @@
+﻿<Page
+	x:Class="Kamery.Views.CameraPlayerPage"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d">
+
+	<Grid>
+        <StackPanel Spacing="20" HorizontalAlignment="Left">
+            <TextBlock Name="CameraCountText" Text="Na této obrazovce je možné nastavit vestavěný přehrávač kamer a spustit jej" />
+
+			<TextBlock FontSize="20" FontWeight="SemiBold" Margin="0 10 0 0">
+				Nastavení přehrávače
+			</TextBlock>
+			<!--<TextBlock Text="Klepnutím na tlačítko níže se spustí všechny kamery" />
+			<Button Content="Zobrazit všechny kamery" Click="Button_Click"/>-->
+            <InfoBar
+            Name="InfoBarCameraCountWarn"
+                
+            IsOpen="True"
+            Severity="Error"
+            Title="Varování"
+            Message="Počet kamer je vyšší než počet možných kamer v mřížce." />
+            <Slider 
+				 Name="SliderRow"
+				 ValueChanged="SliderRow_ValueChanged"
+				 AutomationProperties.Name="Slider with ticks"
+				 TickFrequency="1"
+				 TickPlacement="Outside"
+				 SnapsTo="Ticks"
+				 Width="200"
+				 HorizontalAlignment="Left"
+				 Minimum="1"
+				 Maximum="4"
+				 Header="Nastavení řádků v mřížce:   1"/>
+
+			<Slider
+				 ValueChanged="SliderColumn_ValueChanged"
+				 Name="SliderColumn"
+				 AutomationProperties.Name="Slider with ticks"
+				 TickFrequency="1"
+				 TickPlacement="Outside"
+				 SnapsTo="Ticks"
+				 Width="200"
+				 HorizontalAlignment="Left"
+				 Minimum="1"
+				 Maximum="4"
+				 Header="Nastavení sloupců v mřížce:   1"/>
+
+            <StackPanel Orientation="Horizontal">
+                <ToggleSwitch Name="FullscreenSwitch" Header="Zobrazit přes celou obrazovku" OffContent="Ne" OnContent="Ano" IsOn="False" />
+            </StackPanel>
+
+            <TextBlock FontSize="20" FontWeight="SemiBold" Margin="0 10 0 0">
+				Spuštění kamer
+			</TextBlock>
+
+			<!--<TextBlock Text="Klepnutím na tlačítko níže se spustí všechny kamery v interním přehrávači" />-->
+			<Button Content="Uložit nastavení a zobrazit všechny kamery v KameryPlayer" Click="Button_Click"/>
+
+		</StackPanel>
+	</Grid>
+</Page>

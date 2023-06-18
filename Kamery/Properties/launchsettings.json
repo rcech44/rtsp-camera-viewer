@@ -1,0 +1,10 @@
+﻿{
+    "profiles": {
+      "Kamery (Unpackaged)": {
+        "commandName": "Project"
+      },
+      "Kamery (Package)": {
+        "commandName": "MsixPackage"
+      }
+    }
+}
