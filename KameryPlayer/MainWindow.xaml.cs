@@ -114,7 +114,8 @@ namespace KameryPlayer
                 _mediaPlayer = new LibVLCSharp.Shared.MediaPlayer(_libVLC);
                 ((VideoView)sender).MediaPlayer = _mediaPlayer;
                 c = _cameras[_usedCameraIndex++];
-                var address = "rtsp://" + c.LoginName + ":" + c.LoginPassword + "@" + c.Address + "/stream2";
+                //var address = "rtsp://" + c.LoginName + ":" + c.LoginPassword + "@" + c.Address + "/stream2";
+                var address = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
                 _mediaPlayer.Play(new Media(_libVLC, new Uri(address)));
             }
         }
