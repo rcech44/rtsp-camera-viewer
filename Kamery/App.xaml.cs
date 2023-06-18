@@ -10,7 +10,10 @@ using Kamery.Views;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
+using Windows.ApplicationModel.Core;
+using Windows.UI.ViewManagement;
 
 namespace Kamery;
 
@@ -74,9 +77,9 @@ public partial class App : Application
             services.AddTransient<CameraPlayerViewModel>();
             services.AddTransient<CameraPlayerPage>();
             services.AddTransient<CameraDetailsViewModel>();
-            services.AddTransient<CameraDetailsPage>();
+            //services.AddTransient<CameraDetailsPage>();
             services.AddTransient<Testování_kamerViewModel>();
-            services.AddTransient<Testování_kamerPage>();
+            //services.AddTransient<Testování_kamerPage>();
             services.AddTransient<SettingsViewModel>();
             services.AddTransient<SettingsPage>();
             //services.AddTransient<PodrobnostiSeznamuViewModel>();

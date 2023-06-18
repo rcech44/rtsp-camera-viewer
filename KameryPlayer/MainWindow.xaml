@@ -10,6 +10,6 @@
         Name="VLCWindow"
         Background="Black"
         Loaded="Window_Loaded">
-    <Grid Name="VLCGrid" Background="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ShowGridLines="True">
+    <Grid Name="VLCGrid" Background="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     </Grid>
 </Window>

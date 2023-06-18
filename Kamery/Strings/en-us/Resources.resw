@@ -172,6 +172,6 @@
     <value>CameraDetails</value>
   </data>
   <data name="Shell_CameraPlayer.Content" xml:space="preserve">
-    <value>CameraPlayer</value>
+    <value>Přehrávač</value>
   </data>
 </root>

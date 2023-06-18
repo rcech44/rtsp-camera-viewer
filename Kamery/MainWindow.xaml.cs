@@ -2,6 +2,8 @@
 using Microsoft.UI.Xaml.Media;
 using Windows.UI.ViewManagement;
 using Microsoft.UI.Composition.SystemBackdrops;
+using Windows.ApplicationModel.Core;
+using Microsoft.UI;
 
 namespace Kamery;
 
@@ -15,9 +17,12 @@ public sealed partial class MainWindow : WindowEx
     {
         InitializeComponent();
 
+        // SystemBackdrop = new DesktopAcrylicBackdrop();
+
+
         SystemBackdrop = new MicaBackdrop()
         {
-            Kind = MicaKind.BaseAlt
+            Kind = MicaKind.Base
         };
 
         AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico"));

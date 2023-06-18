@@ -32,6 +32,7 @@ public sealed partial class CameraPlayerPage : Page
         InitializeComponent();
         CameraPlayerSettings settings = new CameraPlayerSettingsService().LoadSettings();
         FullscreenSwitch.IsOn = settings.Fullscreen;
+        VolumeSwitch.IsOn = settings.Volume;
         SliderRow.Value = settings.NumberOfRows;
         SliderColumn.Value = settings.NumberOfCols;
     }
@@ -61,9 +62,10 @@ public sealed partial class CameraPlayerPage : Page
     private void Button_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         var fullscreen = (bool)FullscreenSwitch.IsOn;
+        var volume = (bool)VolumeSwitch.IsOn;
         var rows = (int)SliderRow.Value;
         var cols = (int)SliderColumn.Value;
-        var settings = new CameraPlayerSettings { Fullscreen = fullscreen, NumberOfCols = cols, NumberOfRows = rows };
+        var settings = new CameraPlayerSettings { Fullscreen = fullscreen, Volume = volume, NumberOfCols = cols, NumberOfRows = rows };
         new CameraPlayerSettingsService().SaveSettings(settings);
         LaunchPlayer();
     }

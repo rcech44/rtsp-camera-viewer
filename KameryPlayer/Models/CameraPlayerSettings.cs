@@ -12,6 +12,10 @@ namespace KameryPlayer.Models
         {
             get; set;
         }
+        public bool Volume
+        {
+            get; set;
+        }
         public int NumberOfRows
         {
             get; set;

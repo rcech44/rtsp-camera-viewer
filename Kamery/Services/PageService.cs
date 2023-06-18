@@ -18,8 +18,8 @@ public class PageService : IPageService
         Configure<DatováMřížkaViewModel, DatováMřížkaPage>();
         //Configure<PodrobnostiSeznamuViewModel, PodrobnostiSeznamuPage>();
         Configure<SettingsViewModel, SettingsPage>();
-        Configure<Testování_kamerViewModel, Testování_kamerPage>();
-        Configure<CameraDetailsViewModel, CameraDetailsPage>();
+        //Configure<Testování_kamerViewModel, Testování_kamerPage>();
+        //Configure<CameraDetailsViewModel, CameraDetailsPage>();
         Configure<CameraPlayerViewModel, CameraPlayerPage>();
     }
 
