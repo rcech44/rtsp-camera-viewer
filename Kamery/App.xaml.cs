@@ -76,9 +76,9 @@ public partial class App : Application
             // Views and ViewModels
             services.AddTransient<CameraPlayerViewModel>();
             services.AddTransient<CameraPlayerPage>();
-            services.AddTransient<CameraDetailsViewModel>();
+            //services.AddTransient<CameraDetailsViewModel>();
             //services.AddTransient<CameraDetailsPage>();
-            services.AddTransient<Testování_kamerViewModel>();
+            //services.AddTransient<Testování_kamerViewModel>();
             //services.AddTransient<Testování_kamerPage>();
             services.AddTransient<SettingsViewModel>();
             services.AddTransient<SettingsPage>();

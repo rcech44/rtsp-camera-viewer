@@ -14,4 +14,8 @@
     <PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.18" />
   </ItemGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\Kamery.Core\Kamery.Core.csproj" />
+	</ItemGroup>
+
 </Project>

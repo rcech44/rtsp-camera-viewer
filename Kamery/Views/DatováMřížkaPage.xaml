@@ -38,7 +38,7 @@
             CanUserResizeColumns="True"
             LoadingRow="DataGrid_LoadingRow"
             AutoGenerateColumns="False"
-            Name="DataGrid"
+            Name="DataGridCameras"
             GridLinesVisibility="Vertical"
                
             CellEditEnded="DataGrid_CellEditEnded"
@@ -54,7 +54,7 @@
                 </controls:DataGrid.Columns>
             </controls:DataGrid>
                 <CommandBar Background="Transparent" IsOpen="False" DefaultLabelPosition="Right" HorizontalAlignment="Left">
-                    <AppBarButton Icon="Delete" Label="Smazat vybranou kameru" Click="AppBarButton_Click"/>
+                    <AppBarButton Icon="Delete" Label="Smazat vybranou kameru" Click="RemoveCameraFromGrid"/>
                 </CommandBar>
 
                 <TextBlock FontSize="20" FontWeight="SemiBold">
@@ -65,7 +65,7 @@
             <TextBox Name="textBoxAddress" HorizontalAlignment="Left" Width="300" Header="Adresa kamery:" PlaceholderText="..." />
             <TextBox Name="textBoxLoginName" HorizontalAlignment="Left" Width="300" Header="Přihlašovací jméno:" PlaceholderText="..." />
             <TextBox Name="textBoxLoginPassword" HorizontalAlignment="Left" Width="300" Header="Přihlašovací heslo:" PlaceholderText="..." />
-            <Button Content="Přidat kameru" Click="Button_Click"/>
+                <Button Content="Přidat kameru" Click="AddCameraToGrid"/>
         </StackPanel>
     </StackPanel>
     </ScrollViewer>

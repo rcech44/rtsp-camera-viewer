@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using Kamery.Contracts.ViewModels;
 using Kamery.Core.Contracts.Services;
 using Kamery.Core.Models;
+using Kamery.Core.Services;
 using Newtonsoft.Json;
 
 namespace Kamery.ViewModels;
@@ -33,24 +34,21 @@ public partial class DatováMřížkaViewModel : ObservableRecipient, INavigatio
         }
     }
 
-    public void Remove(Camera _camera)
+    public async Task Remove(Camera _camera)
     {
         Source.Remove(_camera);
-        Save();
+        await Save();
     }
 
-    public void Save()
+    public async Task Save()
     {
-        var list = Source.ToList();
-        var json = JsonConvert.SerializeObject(list);
-
-        File.WriteAllText("cameras.json", json);
+        await CameraDataService.SaveAllCamerasAsync(Source.ToList());
     }
 
-    public void Add(Camera _camera)
+    public async void Add(Camera _camera)
     {
         Source.Add(_camera);
-        Save();
+        await Save();
     }
 
     public void OnNavigatedFrom()

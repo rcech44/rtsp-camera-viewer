@@ -23,13 +23,13 @@ public sealed partial class MainPage : Page
 
     private List<Camera> Cameras
     {
-        get; set; 
+        get;
     }
 
     public MainPage()
     {
         ViewModel = App.GetService<MainViewModel>();
-        Cameras = CameraDataService.AllCameras().ToList();
+        Cameras = CameraDataService.GetAllCameras().ToList();
         InitializeComponent();
         CameraCountText.Text = "Na této obrazovce je možné spouštět kamery. Momentálně je uloženo " + Cameras.Count.ToString() + " kamer.";
     }
@@ -50,7 +50,7 @@ public sealed partial class MainPage : Page
     public void LaunchPlayer()
     {
         Process p = new Process();
-        p.StartInfo.FileName = "KameryPlayer.exe";
+        p.StartInfo.FileName = "Kamery.Player.exe";
         p.Start();
         Thread.Sleep(1000);
     }
@@ -64,12 +64,12 @@ public sealed partial class MainPage : Page
         }
     }
 
-    private async void Button_Click2(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    private async void PlayAllCameras(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         LaunchPlayer();
     }
 
-    private void Button_Click_1(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    private void PlayCamera(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         DependencyObject parent = VisualTreeHelper.GetParent((Button)sender);
 

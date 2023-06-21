@@ -16,7 +16,7 @@
             </TextBlock>
 
             <TextBlock Text="Klepnutím na tlačítko níže se spustí všechny kamery ve vestavěném přehrávači. Pro změnu nastavení změňte nastavení v záložce Přehrávač." />
-            <Button Content="Zobrazit všechny kamery ve vestavěném přehrávači" Click="Button_Click2"/>
+            <Button Content="Zobrazit všechny kamery ve vestavěném přehrávači" Click="PlayAllCameras"/>
 
             <TextBlock FontSize="20" FontWeight="SemiBold" Margin="0 10 0 0">
                 Spuštění jednotlivých kamer
@@ -28,7 +28,7 @@
                 <GridView.ItemTemplate >
                     <DataTemplate>
                         <Grid HorizontalAlignment="Left">
-                            <Button HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="300" Click="Button_Click_1">
+                            <Button HorizontalContentAlignment="Left" VerticalContentAlignment="Center" Width="300" Click="PlayCamera">
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="/Assets/camera.png" Width="50" Height="50" Margin="10 0 0 0"/>
 

@@ -8,15 +8,14 @@ namespace Kamery.ViewModels;
 
 public partial class MainViewModel : ObservableRecipient
 {
-    public List<Camera> Source { get; } = new List<Camera>();
+    public List<Camera> Source { get; set; } = new List<Camera>();
 
     public MainViewModel()
     {
-        Source = CameraDataService.AllCameras().ToList();
+        LoadCameras();
     }
-
-    public void Button_Clicak()
+    private async void LoadCameras()
     {
-    
+        Source = (await CameraDataService.GetAllCamerasAsync()).ToList();
     }
 }

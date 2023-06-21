@@ -61,7 +61,7 @@
 			</TextBlock>
 
 			<!--<TextBlock Text="Klepnutím na tlačítko níže se spustí všechny kamery v interním přehrávači" />-->
-			<Button Content="Uložit nastavení a zobrazit všechny kamery v KameryPlayer" Click="Button_Click"/>
+            <Button Content="Uložit nastavení a zobrazit všechny kamery" Click="SaveAndPlay"/>
 
 		</StackPanel>
 	</Grid>

@@ -7,7 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kamery", "Kamery\Kamery.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kamery.Core", "Kamery.Core\Kamery.Core.csproj", "{7BB64BDB-FEFF-48C9-9D64-1BE844378DFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KameryPlayer", "KameryPlayer\KameryPlayer.csproj", "{886E8390-F2D7-4C44-A87A-E2FB1B6687C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kamery.Player", "KameryPlayer\Kamery.Player.csproj", "{886E8390-F2D7-4C44-A87A-E2FB1B6687C4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7BB64BDB-FEFF-48C9-9D64-1BE844378DFF} = {7BB64BDB-FEFF-48C9-9D64-1BE844378DFF}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

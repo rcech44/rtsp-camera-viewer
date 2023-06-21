@@ -20,17 +20,17 @@ public sealed partial class CameraPlayerPage : Page
     public void LaunchPlayer()
     {
         Process p = new Process();
-        p.StartInfo.FileName = "KameryPlayer.exe";
+        p.StartInfo.FileName = "Kamery.Player.exe";
         p.Start();
         Thread.Sleep(1000);
     }
 
     public CameraPlayerPage()
     {
+        Cameras = CameraDataService.GetAllCameras().ToList();
         ViewModel = App.GetService<CameraPlayerViewModel>();
-        Cameras = CameraDataService.AllCameras().ToList();
         InitializeComponent();
-        CameraPlayerSettings settings = new CameraPlayerSettingsService().LoadSettings();
+        CameraPlayerSettings settings = CameraPlayerSettingsService.LoadSettings();
         FullscreenSwitch.IsOn = settings.Fullscreen;
         VolumeSwitch.IsOn = settings.Volume;
         SliderRow.Value = settings.NumberOfRows;
@@ -59,14 +59,14 @@ public sealed partial class CameraPlayerPage : Page
         else InfoBarCameraCountWarn.IsOpen = false;
     }
 
-    private void Button_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    private void SaveAndPlay(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        var fullscreen = (bool)FullscreenSwitch.IsOn;
+        var fullScreen = (bool)FullscreenSwitch.IsOn;
         var volume = (bool)VolumeSwitch.IsOn;
         var rows = (int)SliderRow.Value;
         var cols = (int)SliderColumn.Value;
-        var settings = new CameraPlayerSettings { Fullscreen = fullscreen, Volume = volume, NumberOfCols = cols, NumberOfRows = rows };
-        new CameraPlayerSettingsService().SaveSettings(settings);
+        var settings = new CameraPlayerSettings { Fullscreen = fullScreen, Volume = volume, NumberOfCols = cols, NumberOfRows = rows };
+        CameraPlayerSettingsService.SaveSettings(settings);
         LaunchPlayer();
     }
 }

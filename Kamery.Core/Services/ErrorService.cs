@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Windows;
 
-namespace KameryPlayer.Services;
+namespace Kamery.Core.Services;
 public class ErrorService
 {
 
@@ -17,7 +17,6 @@ public class ErrorService
 
     public static void ThrowFileError()
     {
-        MessageBox.Show("Nastala chyba při načítání souboru nastavení a kamer. Program se nyní ukončí.");
-        System.Environment.Exit(1);
+        throw new Exception("Nastala chyba při načítání souboru nastavení a kamer. Soubor pravděpodobně neexistuje.");
     }
 }

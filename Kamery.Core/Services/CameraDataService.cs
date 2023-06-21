@@ -1,16 +1,9 @@
 ﻿using Kamery.Core.Contracts.Services;
 using Kamery.Core.Models;
+using Kamery.Core.Helpers;
 using Newtonsoft.Json;
-
 namespace Kamery.Core.Services;
 
-// This class holds sample data used by some generated pages to show how they can be used.
-// TODO: The following classes have been created to display sample data. Delete these files once your app is using real data.
-// 1. Contracts/Services/ISampleDataService.cs
-// 2. Services/SampleDataService.cs
-// 3. Models/SampleCompany.cs
-// 4. Models/SampleOrder.cs
-// 5. Models/SampleOrderDetail.cs
 public class CameraDataService : ICameraDataService
 {
     private List<Camera> _allCameras;
@@ -19,17 +12,63 @@ public class CameraDataService : ICameraDataService
     {
     }
 
-    public static IEnumerable<Camera> AllCameras()
+    public static async Task<IEnumerable<Camera>> GetAllCamerasAsync()
     {
-        var json = File.ReadAllText("cameras.json");
-        var objects = JsonConvert.DeserializeObject<Camera[]>(json);
-
-        return objects;
+        try
+        {
+            var json = await File.ReadAllTextAsync("cameras.json");
+            var objects = await Json.ToObjectAsync<Camera[]>(json);
+            //var objects = JsonConvert.DeserializeObject<Camera[]>(json);
+            return objects;
+        }
+        catch (Exception)
+        {
+            ErrorService.ThrowFileError();
+            return null;
+        }
+    }
+    public static IEnumerable<Camera> GetAllCameras()
+    {
+        try
+        {
+            var json = File.ReadAllText("cameras.json");
+            var objects = JsonConvert.DeserializeObject<Camera[]>(json);
+            return objects;
+        }
+        catch (Exception)
+        {
+            ErrorService.ThrowFileError();
+            return null;
+        }
+    }
+    public static void SaveAllCameras(List<Camera> cameras)
+    {
+        try
+        {
+            var json = JsonConvert.SerializeObject(cameras);
+            File.WriteAllText("cameras.json", json);
+        }
+        catch (Exception)
+        {
+            ErrorService.ThrowFileError();
+        }
+    }
+    public static async Task SaveAllCamerasAsync(List<Camera> cameras)
+    {
+        try
+        {
+            var json = await Json.StringifyAsync(cameras);
+            await File.WriteAllTextAsync("cameras.json", json);
+        }
+        catch (Exception)
+        {
+            ErrorService.ThrowFileError();
+        }
     }
 
     public async Task<IEnumerable<Camera>> GetGridDataAsync()
     {
-        _allCameras = new List<Camera>(AllCameras());
+        _allCameras = new List<Camera>(await GetAllCamerasAsync());
 
         await Task.CompletedTask;
         return _allCameras;
@@ -37,7 +76,7 @@ public class CameraDataService : ICameraDataService
 
     public async Task<IEnumerable<Camera>> GetListDetailsDataAsync()
     {
-        _allCameras = new List<Camera>(AllCameras());
+        _allCameras = new List<Camera>(await GetAllCamerasAsync());
 
         await Task.CompletedTask;
         return _allCameras;

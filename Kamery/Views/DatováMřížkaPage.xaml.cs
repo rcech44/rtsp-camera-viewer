@@ -27,7 +27,7 @@ public partial class DatováMřížkaPage : Page
         {
             if (e.EditAction == DataGridEditAction.Commit)
             {
-                ViewModel.Save();
+                await ViewModel.Save();
                 // await Database.Instance.SaveChangesAsync();
             }
         }
@@ -45,7 +45,7 @@ public partial class DatováMřížkaPage : Page
         }
     }
 
-    private void Button_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    private void AddCameraToGrid(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
         if (textBoxName.Text.Length == 0 ||
             textBoxAddress.Text.Length == 0 ||
@@ -80,10 +80,10 @@ public partial class DatováMřížkaPage : Page
         InfoBarAdd.IsOpen = true;
     }
 
-    private void AppBarButton_Click(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    private async void RemoveCameraFromGrid(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        var selectedItem = (Camera)DataGrid.SelectedItem;
-        ViewModel.Remove(selectedItem);
+        var selectedItem = DataGridCameras.SelectedItem as Camera;
+        await ViewModel.Remove(selectedItem);
         InfoBarAdd.IsOpen = false;
         InfoBarDelete.IsOpen = true;
     }
