@@ -18,7 +18,7 @@
             <InfoBar
             Name="InfoBarDelete"
             IsOpen="False"
-            Severity="Success"
+            Severity="Success"  
             Title="Úspěch"
             Message="Byla úspěšně odebrána kamera." />
 
@@ -33,7 +33,7 @@
                 <TextBlock Text="Zde je seznam všech přidaných kamer, detaily kamery lze měnit pokliknutím na buňku v tabulce" />
                 
                 <controls:DataGrid
-            CanUserSortColumns="True"
+            CanUserSortColumns="True"  
             CanUserReorderColumns="True"
             CanUserResizeColumns="True"
             LoadingRow="DataGrid_LoadingRow"

@@ -31,7 +31,7 @@ public sealed partial class MainPage : Page
         ViewModel = App.GetService<MainViewModel>();
         Cameras = CameraDataService.GetAllCameras().ToList();
         InitializeComponent();
-        CameraCountText.Text = "Na této obrazovce je možné spouštět kamery. Momentálně je uloženo " + Cameras.Count.ToString() + " kamer.";
+        //CheckEventLogsHelper();
     }
 
     public void LaunchCamera(Camera c)
@@ -44,7 +44,7 @@ public sealed partial class MainPage : Page
         p.StartInfo.Arguments = $"{address} --qt-minimal-view";
         p.Start();
         Thread.Sleep(1000);
-        MainPage.MoveWindow(p.MainWindowHandle, 0, 0, 500, 500, true);
+        //MainPage.MoveWindow(p.MainWindowHandle, 0, 0, 500, 500, true);
     }
 
     public void LaunchPlayer()
@@ -88,6 +88,67 @@ public sealed partial class MainPage : Page
         if (c != null)
         {
             LaunchCamera(c);
+        }
+    }
+
+    private async Task CheckEventLogs()
+    {
+        try
+        {
+            var logName = "System"; // Název logu, ve kterém se nachází události
+            var source = "Microsoft-Windows-Kernel-Power"; // Název zdroje události
+            var count = 0;
+            var latestDate = DateTime.Now.AddYears(-1);
+
+            EventLog eventLog = new EventLog(logName);
+
+            foreach (EventLogEntry entry in eventLog.Entries)
+            {
+                if (entry.Source.Equals(source, StringComparison.OrdinalIgnoreCase) && entry.EventID == 41 && entry.CategoryNumber == 63)
+                {
+                    if (entry.TimeWritten.CompareTo(DateTime.Now.AddDays(-1)) > 0)
+                    {
+                        count++;
+                        if (entry.TimeWritten > latestDate) latestDate = entry.TimeWritten;
+                    }
+                }
+            }
+
+            eventLog.Close();
+
+            if (count > 0)
+            {
+                MainViewModel.EventLogsFound = true;
+                MainViewModel.LastEventLog = latestDate;
+                DispatcherQueue.TryEnqueue(async () =>
+                await new ContentDialog
+                {
+                    Title = "Upozornění na výpadek napájení",
+                    Content = "Byl detekován výpadek napájení v počítači za posledních 24 hodin. Je možné, že došlo k výpadku proudu, tudíž se mohly resetovat IP adresy kamer. Zkontrolujte IP adresy kamer. Poslední výpadek proběhl v " + latestDate.ToString(),
+                    XamlRoot = this.XamlRoot,
+                    CloseButtonText = "Ok, chápu"
+                }.ShowAsync()
+                );
+
+            }
+        }
+        catch (Exception ex)
+        {
+            MainViewModel.EventLogsFound = false;
+        }
+    }
+
+    private async void Page_Loaded(object sender, RoutedEventArgs e)
+    {
+        if (!MainViewModel.EventLogsChecked)
+        {
+            await CheckEventLogs();
+            MainViewModel.EventLogsChecked = true;
+        }
+        if (MainViewModel.EventLogsFound)
+        {
+            InfoBarElectricityError.IsOpen = true;
+            InfoBarElectricityError.Message = "Byl detekován výpadek proudu v " + MainViewModel.LastEventLog.ToString();
         }
     }
 }

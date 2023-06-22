@@ -32,7 +32,7 @@ public partial class MainWindow : Window
         LoadSettings();
         InitVLCGrid();
         LoadVideoViews();
-        StartBackgroundTask();
+        if (_settings.Refresh) StartBackgroundTask();
     }
     private void InitVLCGrid()
     {
@@ -61,11 +61,16 @@ public partial class MainWindow : Window
     }
     private void StartBackgroundTask()
     {
-        _timer.Interval = TimeSpan.FromMinutes(5);
+        _timer.Interval = TimeSpan.FromMinutes(_settings.RefreshInterval);
         _timer.Tick += RefreshStreams;
         _timer.Start();
     }
     private void RefreshStreams(object sender, EventArgs e)
+    {
+        VLCGrid.Children.Clear();
+        LoadVideoViews();
+    }
+    private void RefreshStreamsManual()
     {
         VLCGrid.Children.Clear();
         LoadVideoViews();
@@ -156,6 +161,10 @@ public partial class MainWindow : Window
         if (e.Key == Key.Escape)
         {
             System.Environment.Exit(0);
+        }
+        else if (e.Key == Key.R)
+        {
+            RefreshStreamsManual();
         }
     }
 

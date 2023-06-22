@@ -9,6 +9,9 @@ namespace Kamery.ViewModels;
 public partial class MainViewModel : ObservableRecipient
 {
     public List<Camera> Source { get; set; } = new List<Camera>();
+    public static bool EventLogsChecked { get; set; } = false;
+    public static bool EventLogsFound { get; set; } = false;
+    public static DateTime LastEventLog { get; set; } = DateTime.Now;
 
     public MainViewModel()
     {
@@ -16,6 +19,6 @@ public partial class MainViewModel : ObservableRecipient
     }
     private async void LoadCameras()
     {
-        Source = (await CameraDataService.GetAllCamerasAsync()).ToList();
+        Source = CameraDataService.GetAllCameras().ToList();
     }
 }

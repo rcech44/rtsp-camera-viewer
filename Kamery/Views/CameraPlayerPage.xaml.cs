@@ -2,7 +2,7 @@
 using Kamery.Core.Models;
 using Kamery.Core.Services;
 using Kamery.ViewModels;
-
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
 namespace Kamery.Views;
@@ -35,38 +35,71 @@ public sealed partial class CameraPlayerPage : Page
         VolumeSwitch.IsOn = settings.Volume;
         SliderRow.Value = settings.NumberOfRows;
         SliderColumn.Value = settings.NumberOfCols;
+        RefreshSwitch.IsOn = settings.Refresh;
+        RefreshIntervalBox.Value = settings.RefreshInterval;
+        if (!settings.Refresh) RefreshIntervalBox.IsEnabled = false;
     }
 
     private void SliderRow_ValueChanged(object sender, Microsoft.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
     {
         SliderRow.Header = "Nastavení řádků v mřížce:   " + e.NewValue;
         if (SliderColumn != null)
-        if (SliderRow.Value * SliderColumn.Value < Cameras.Count )
         {
-            InfoBarCameraCountWarn.IsOpen = true;
+            if (SliderRow.Value * SliderColumn.Value < Cameras.Count)
+            {
+                InfoBarCameraCountWarn.IsOpen = true;
+                InfoBarCameraCountWarn.Title = "Varování";
+                InfoBarCameraCountWarn.Severity = InfoBarSeverity.Error;
+                InfoBarCameraCountWarn.Message = "Počet kamer je vyšší než počet možných kamer v mřížce.";
+            }
+            else
+            {
+                InfoBarCameraCountWarn.IsOpen = true;
+                InfoBarCameraCountWarn.Title = "Správně";
+                InfoBarCameraCountWarn.Severity = InfoBarSeverity.Success;
+                InfoBarCameraCountWarn.Message = "Všechny zadané kamery se vlezou do mřížky.";
+            }
         }
-        else InfoBarCameraCountWarn.IsOpen = false;
     }
 
     private void SliderColumn_ValueChanged(object sender, Microsoft.UI.Xaml.Controls.Primitives.RangeBaseValueChangedEventArgs e)
     {
         SliderColumn.Header = "Nastavení sloupců v mřížce:   " + e.NewValue;
         if (SliderRow != null)
-        if (SliderRow.Value * SliderColumn.Value < Cameras.Count)
         {
-            InfoBarCameraCountWarn.IsOpen = true;
+            if (SliderRow.Value * SliderColumn.Value < Cameras.Count)
+            {
+                InfoBarCameraCountWarn.IsOpen = true;
+                InfoBarCameraCountWarn.Title = "Varování";
+                InfoBarCameraCountWarn.Severity = InfoBarSeverity.Error;
+                InfoBarCameraCountWarn.Message = "Počet kamer je vyšší než počet možných kamer v mřížce.";
+            }
+            else
+            {
+                InfoBarCameraCountWarn.IsOpen = true;
+                InfoBarCameraCountWarn.Title = "Správně";
+                InfoBarCameraCountWarn.Severity = InfoBarSeverity.Success;
+                InfoBarCameraCountWarn.Message = "Všechny zadané kamery se vlezou do mřížky.";
+            }
         }
-        else InfoBarCameraCountWarn.IsOpen = false;
     }
 
     private void SaveAndPlay(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
-        var fullScreen = (bool)FullscreenSwitch.IsOn;
-        var volume = (bool)VolumeSwitch.IsOn;
+        var fullScreen = FullscreenSwitch.IsOn;
+        var volume = VolumeSwitch.IsOn;
         var rows = (int)SliderRow.Value;
         var cols = (int)SliderColumn.Value;
-        var settings = new CameraPlayerSettings { Fullscreen = fullScreen, Volume = volume, NumberOfCols = cols, NumberOfRows = rows };
-        CameraPlayerSettingsService.SaveSettings(settings);
+        var refresh = RefreshSwitch.IsOn;
+        var refreshInterval = (int)RefreshIntervalBox.Value;
+        var newSettings = new CameraPlayerSettings { Fullscreen = fullScreen, Volume = volume, NumberOfCols = cols, NumberOfRows = rows, Refresh = refresh, RefreshInterval = refreshInterval };
+        CameraPlayerSettingsService.SaveSettings(newSettings);
         LaunchPlayer();
+    }
+
+    private void RefreshSwitch_Toggled(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        if (RefreshSwitch.IsOn) RefreshIntervalBox.IsEnabled = true;
+        else RefreshIntervalBox.IsEnabled = false;
     }
 }

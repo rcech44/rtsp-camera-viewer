@@ -5,11 +5,31 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resources="using:Kamery"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Loaded="Page_Loaded"
+    >
 
     <Grid>
         <StackPanel Spacing="20" HorizontalAlignment="Left">
-            <TextBlock Name="CameraCountText" Text="Na této obrazovce je možné spouštět kamery. Momentálně je uloženo 5 kamer." />
+            <InfoBar
+            Name="InfoBarElectricityError"
+            Margin="0 0 0 0"
+            IsOpen="False"
+            Severity="Error"
+            IsClosable="False"
+            Title="Detekován výpadek proudu v posledních 24 hodinách"
+            Message=" " />
+            <Image Source="/Assets/camera.png" Height="100" HorizontalAlignment="Left"/>
+            <TextBlock TextWrapping="Wrap" MaxLines="5" Name="CameraCountText" Text="Vítejte v aplikaci, která dokáže spravovat a zobrazovat IP kamery. V levém menu jsou na možnost tři záložky - hlavní obrazovka, přehrávač kamer a správa kamer. Momentálně jste na hlavní obrazovce, kde je možné spustit jednotlivé kamery. V přehrávači je možné spustit více kamer naráz s různým nastavením. Ve správě kamer lze ukládat současné kamery, které lze později spustit." />
+
+            <InfoBar
+            Name="InfoBarElectricity"
+            Margin="0 0 0 0"
+            IsOpen="True"
+            Severity="Informational"
+            IsClosable="False"
+            Title="Upozornění"
+            Message="V případě výpadku proudu se pravděpodobně změní IP adresy kamer. Zkontrolujte, zda jsou adresy správné." />
 
             <TextBlock FontSize="20" FontWeight="SemiBold" Margin="0 10 0 0">
                 Spuštění všech kamer

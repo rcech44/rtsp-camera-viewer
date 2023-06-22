@@ -7,21 +7,28 @@
 	mc:Ignorable="d">
 
 	<Grid>
+        <ScrollViewer>
         <StackPanel Spacing="20" HorizontalAlignment="Left">
-            <TextBlock Name="CameraCountText" Text="Na této obrazovce je možné nastavit vestavěný přehrávač kamer a spustit jej" />
 
-			<TextBlock FontSize="20" FontWeight="SemiBold" Margin="0 10 0 0">
-				Nastavení přehrávače
+            <Image Source="/Assets/mediaplayer.png" Height="100" HorizontalAlignment="Left"/>
+
+                <TextBlock TextWrapping="Wrap" Name="CameraCountText" Text="Na této obrazovce je možné nastavit vestavěný přehrávač kamer a spustit jej. Přehrávač se automaticky aktualizuje co 15 minut (kdyby vypadl signál kamery). Pomocí klávesy 'ESC' lze přehrávač ukončit a pomocí klávesy 'R' lze vynutit znovu načtení kamer." />
+
+                <TextBlock FontSize="20" FontWeight="SemiBold" Margin="0 0 0 0">
+				Nastavení a spuštění přehrávače
 			</TextBlock>
-			<!--<TextBlock Text="Klepnutím na tlačítko níže se spustí všechny kamery" />
-			<Button Content="Zobrazit všechny kamery" Click="Button_Click"/>-->
+
+
             <InfoBar
-            Name="InfoBarCameraCountWarn"
-                
-            IsOpen="True"
-            Severity="Error"
-            Title="Varování"
-            Message="Počet kamer je vyšší než počet možných kamer v mřížce." />
+                Name="InfoBarCameraCountWarn"
+                IsOpen="True"
+                Severity="Error"
+                Title="Varování"
+                IsClosable="False"
+                HorizontalAlignment="Left"
+                MaxWidth="550"
+                Message="Počet kamer je vyšší než počet možných kamer v mřížce." />
+
             <Slider 
 				 Name="SliderRow"
 				 ValueChanged="SliderRow_ValueChanged"
@@ -35,7 +42,7 @@
 				 Maximum="4"
 				 Header="Nastavení řádků v mřížce:   1"/>
 
-			<Slider
+            <Slider
 				 ValueChanged="SliderColumn_ValueChanged"
 				 Name="SliderColumn"
 				 AutomationProperties.Name="Slider with ticks"
@@ -56,13 +63,36 @@
                 <ToggleSwitch Name="VolumeSwitch" Header="Povolit zvuk v kamerách (pro všechny kamery)" OffContent="Ne" OnContent="Ano" IsOn="True" />
             </StackPanel>
 
-            <TextBlock FontSize="20" FontWeight="SemiBold" Margin="0 10 0 0">
-				Spuštění kamer
-			</TextBlock>
+            <StackPanel Orientation="Horizontal" Spacing="30">
+                <ToggleSwitch Name="RefreshSwitch" Header="Povolit automatické obnovení kamer" OffContent="Ne" OnContent="Ano" IsOn="False" Toggled="RefreshSwitch_Toggled" />
+                <NumberBox Name="RefreshIntervalBox" Value="15" SmallChange="1" LargeChange="1" SpinButtonPlacementMode="Compact" Header="Časový interval (minuty)" IsEnabled="False"/>
+            </StackPanel>
 
-			<!--<TextBlock Text="Klepnutím na tlačítko níže se spustí všechny kamery v interním přehrávači" />-->
             <Button Content="Uložit nastavení a zobrazit všechny kamery" Click="SaveAndPlay"/>
 
-		</StackPanel>
+                <InfoBar
+                HorizontalAlignment="Left"
+                Name="InfoBarInformation"
+                Margin="0 20 0 0"
+                IsOpen="True"
+                Severity="Informational"
+                IsClosable="False"
+                Title="Upozornění"
+                MaxWidth="1000"
+                Message="Pokud se nějaká kamera neukazuje (černá nebo bílá obrazovka), tak přehrávač nenalezl danou IP adresu. Zkontrolujte, zda mají kamery nastavené správné adresy. Adresy kamer se mohly změnit např. při výpadku proudu." />
+
+                <InfoBar
+                HorizontalAlignment="Left"
+                Name="InfoBarRefresh"
+                Margin="0 0 0 0"
+                IsOpen="True"
+                Severity="Informational"
+                IsClosable="False"
+                Title="Upozornění"
+                MaxWidth="1000"
+                Message="Momentálně trochu blbne automatická aktualizace kamer, takže raději ji nezapínat a ručně obnovovat pomocí klávesy 'R'" />
+
+            </StackPanel>
+        </ScrollViewer>
 	</Grid>
 </Page>

@@ -11,6 +11,14 @@ public class CameraPlayerSettings
     {
         get; set; 
     }
+    public bool Refresh
+    {
+        get; set; 
+    }
+    public int RefreshInterval
+    {
+        get; set;
+    }
     public bool Volume
     {
         get; set;
