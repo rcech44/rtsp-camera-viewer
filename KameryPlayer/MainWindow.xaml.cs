@@ -89,6 +89,7 @@ public partial class MainWindow : Window
 
     private void LoadVideoViews()
     {
+        _usedCameraIndex = 0;
         // Create VLC elements
         for (var row = 0; row < _settings.NumberOfRows; row++)
         {
