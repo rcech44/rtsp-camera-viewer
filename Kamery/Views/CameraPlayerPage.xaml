@@ -81,7 +81,7 @@
                 MaxWidth="1000"
                 Message="Pokud se nějaká kamera neukazuje (černá nebo bílá obrazovka), tak přehrávač nenalezl danou IP adresu. Zkontrolujte, zda mají kamery nastavené správné adresy. Adresy kamer se mohly změnit např. při výpadku proudu." />
 
-                <InfoBar
+                <!--<InfoBar
                 HorizontalAlignment="Left"
                 Name="InfoBarRefresh"
                 Margin="0 0 0 0"
@@ -90,7 +90,7 @@
                 IsClosable="False"
                 Title="Upozornění"
                 MaxWidth="1000"
-                Message="Momentálně trochu blbne automatická aktualizace kamer, takže raději ji nezapínat a ručně obnovovat pomocí klávesy 'R'" />
+                Message="Momentálně trochu blbne automatická aktualizace kamer, takže raději ji nezapínat a ručně obnovovat pomocí klávesy 'R'" />-->
 
             </StackPanel>
         </ScrollViewer>

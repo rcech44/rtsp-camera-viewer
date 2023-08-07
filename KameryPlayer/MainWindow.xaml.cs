@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -67,13 +68,21 @@ public partial class MainWindow : Window
     }
     private void RefreshStreams(object sender, EventArgs e)
     {
-        VLCGrid.Children.Clear();
-        LoadVideoViews();
+        //VLCGrid.Children.Clear();
+        //LoadVideoViews();
+        Process newCameraProcess = new Process();
+        newCameraProcess.StartInfo.FileName = Environment.ProcessPath;
+        newCameraProcess.Start();
+        Environment.Exit(0);
     }
-    private void RefreshStreamsManual()
+    private void RefreshStreams()
     {
-        VLCGrid.Children.Clear();
-        LoadVideoViews();
+        //VLCGrid.Children.Clear();
+        //LoadVideoViews();
+        Process newCameraProcess = new Process();
+        newCameraProcess.StartInfo.FileName = Environment.ProcessPath;
+        newCameraProcess.Start();
+        Environment.Exit(0);
     }
     private async void LoadSettings()
     {
@@ -131,8 +140,8 @@ public partial class MainWindow : Window
             ((VideoView)sender).MediaPlayer = _mediaPlayer;
             if (_settings.Volume == true) _mediaPlayer.Volume = 0;
             else _mediaPlayer.Volume = 100;
-            //var address = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
-            //_mediaPlayer.Play(new Media(_libVLC, new Uri(address)));
+            var address = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+            _mediaPlayer.Play(new Media(_libVLC, new Uri(address)));
             return;
         }
 
@@ -145,8 +154,8 @@ public partial class MainWindow : Window
             ((VideoView)sender).MediaPlayer = _mediaPlayer;
             if (_settings.Volume == true) _mediaPlayer.Volume = 0;
             else _mediaPlayer.Volume = 100;
-            var address = "rtsp://" + c.LoginName + ":" + c.LoginPassword + "@" + c.Address + "/stream2";
-            // var address = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+            // var address = "rtsp://" + c.LoginName + ":" + c.LoginPassword + "@" + c.Address + "/stream2";
+            var address = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
             _mediaPlayer.Play(new Media(_libVLC, new Uri(address)));
         }
     }
@@ -165,7 +174,7 @@ public partial class MainWindow : Window
         }
         else if (e.Key == Key.R)
         {
-            RefreshStreamsManual();
+            RefreshStreams();
         }
     }
 
