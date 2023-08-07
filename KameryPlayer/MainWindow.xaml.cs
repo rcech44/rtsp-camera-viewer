@@ -140,8 +140,8 @@ public partial class MainWindow : Window
             ((VideoView)sender).MediaPlayer = _mediaPlayer;
             if (_settings.Volume == true) _mediaPlayer.Volume = 0;
             else _mediaPlayer.Volume = 100;
-            var address = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
-            _mediaPlayer.Play(new Media(_libVLC, new Uri(address)));
+            //var address = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+            //_mediaPlayer.Play(new Media(_libVLC, new Uri(address)));
             return;
         }
 
@@ -154,8 +154,8 @@ public partial class MainWindow : Window
             ((VideoView)sender).MediaPlayer = _mediaPlayer;
             if (_settings.Volume == true) _mediaPlayer.Volume = 0;
             else _mediaPlayer.Volume = 100;
-            // var address = "rtsp://" + c.LoginName + ":" + c.LoginPassword + "@" + c.Address + "/stream2";
-            var address = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+            var address = "rtsp://" + c.LoginName + ":" + c.LoginPassword + "@" + c.Address + "/stream2";
+            // var address = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
             _mediaPlayer.Play(new Media(_libVLC, new Uri(address)));
         }
     }
