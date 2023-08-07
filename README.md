@@ -11,3 +11,4 @@ Screenshots:
 ![Camera Settings](https://i.imgur.com/gohwsI3.png)
 ![Warning](https://i.imgur.com/sVzRUCE.png)
 ![Player](https://i.imgur.com/BxsQTS7.png)
+![Player Window](https://i.imgur.com/bIVnMKo.png)
